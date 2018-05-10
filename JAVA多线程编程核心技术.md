@@ -102,3 +102,42 @@ class DaemonThread extends Thread{
 
 此时DaemonThread是守护线程，Main是用户线程。当Main线程睡眠五秒的时候，守护线程继续执行。当Main睡完执行结束之后，当前没有其他用户线程，守护线程就会退出。
 
+
+
+## 第二章
+
+synchronized锁重入：
+
+​	内部方法可以获得外部方法的锁：
+
+```java
+    public synchronized void A(){
+        System.out.println("Hello! This is A");
+        B();
+    }
+    public synchronized void B(){
+        System.out.println("Hello! This is B");
+        C();
+    }
+    public synchronized void C(){
+        System.out.println("Hello! This is C");
+    }
+```
+
+
+
+虽然B方法需要得到锁，但是B方法在A方法内调用，所以可以获得锁
+
+静态方法块使用synchronized的时候锁的是当前Class对象
+
+当对volatile修饰的变量进行写操作，JVM会向处理器发送一条Lock前缀的指令，将CPU所在的缓存行数据写回到内存中，为了保证其他处理器的缓存和当前缓存一致，每个处理器通过嗅探在总线上传播的数据来检查自己缓存值是不是过期了，当处理器发现自己缓存行对应的内存地址被修改，就会将当前处理器的缓存行置为无效状态，当处理器对这个数据进行读写操作时会重新从系统内存中读取到缓存行中。volatile只能保证每次使用变量的时候都是最新值。
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
