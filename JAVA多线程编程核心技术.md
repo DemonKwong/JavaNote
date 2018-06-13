@@ -132,12 +132,27 @@ synchronized锁重入：
 
 当对volatile修饰的变量进行写操作，JVM会向处理器发送一条Lock前缀的指令，将CPU所在的缓存行数据写回到内存中，为了保证其他处理器的缓存和当前缓存一致，每个处理器通过嗅探在总线上传播的数据来检查自己缓存值是不是过期了，当处理器发现自己缓存行对应的内存地址被修改，就会将当前处理器的缓存行置为无效状态，当处理器对这个数据进行读写操作时会重新从系统内存中读取到缓存行中。volatile只能保证每次使用变量的时候都是最新值。
 
- 
+ ## 第三章
+
+wait()方法：让线程进入等待状态，并且释放锁。该方法必须要在synchronized里面执行，否则会抛出获取不到锁的异常。
+
+notify()方法：随机唤醒一个wait状态的线程，但是不会释放锁。它要等当前线程执行完synchronized才会释放锁给唤醒的那个线程。同样该方法要在synchronized里面执行，否则会抛异常。
+
+**释放和唤醒是由锁对象来调用，不是由线程对象调用，否则会报java.lang.IllegalMonitorStateException**
+
+ wait(long timeout)：设置timeout毫秒之后如果没有被唤醒的话就自己唤醒。
+
+#### 进程间通信
+
+字节流：PipedInputStream和PiipedOutputStream
+
+字符流：PipedReader 和PipedWriter
+
+用法：输出流或者输入流调用connect方法即可。
+
+join()：在main里面调用某个线程的join方法，表示等待此线程执行完后main线程再继续执行
+
+
 
  
 
- 
-
- 
-
- 
